@@ -26,6 +26,15 @@ share/python-wheels/
 *.egg
 MANIFEST
 
+# Annoying files
+*.DS_Store
+*.db
+*.csv
+*.gz
+*.tsv
+*.json
+/data
+
 # PyInstaller
 #  Usually these files are written by a python script from a template
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
