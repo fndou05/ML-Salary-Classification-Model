@@ -30,13 +30,13 @@ Assembling a top-notch production team is essential for creating a successful fi
 ### Logistic Regression
 
 Baseline Matrix:
-
+<br>
 ![img](./images/logregbase.png)
-
+<br>
 Baseline AUC:
-
+<br>
 ![img](./images/logregbaseauc.png)
-
+<br>
 Scores:
 
 Accuracy train Data: 82.82%
@@ -56,26 +56,33 @@ The accuracy and AUC is already pretty good so it may be difficult to improve th
 ### Decision Tree
 
 Baseline Decision Tree:
+<br>
 ![img](./images/dtbase.png)
 
 Baseline DT Matrix:
+<br>
 ![img](./images/dtbasecon.png)
 
 Baseline AUC:
+<br>
 ![img](./images/dtbaseauc.png)
 
 Scores:
 
 Accuracy train Data: 98.38%
+
 Accuracy test Data: 79.75%
-
+<br>
 Recall train Data: 97.69%
+
 Recall test Data: 61.97%
-
+<br>
 Precision train Data: 99.05%
-Precision test Data: 59.71%
 
+Precision test Data: 59.71%
+<br>
 F1 train Data: 98.37%
+
 F1 test Data: 60.82%
 
 This model is definitely overfitted which is to be expected with DT models. Its not performing as well as the LogReg either but we should base our decision on the tuned models. The AUC is fairly low compared to the LogReg as well.
@@ -83,117 +90,99 @@ This model is definitely overfitted which is to be expected with DT models. Its 
 
 ## Trained Models
 
-Action movies have the highest ROI among different genres by a significant margin. This aligns perfectly with the goal of working with a director who excels in this genre.
-
-```python
-# Create a bar plot for average ROI by genre
-plt.figure(figsize=(12, 6))
-sns.barplot(data=genre_roi_avg, x='genre', y='ROI', palette='viridis')
-plt.xticks(rotation=90)
-plt.xlabel('Genre')
-plt.ylabel('Average ROI')
-plt.title('Average ROI by Genre')
-plt.tight_layout()
-plt.show()
-```
-![img](./images/avgroigenre.png)
+After all hyperparameter tuning these are the final models I created.
 
 ### Logistic Regression
 
-Wednesday is the best day to release our movie, with the highest ROI. Releasing during the warmer months, such as June, July, and May, is recommended as people are more likely to go to the movies during this period. This hypothesis likely supports the larger ROI's during those months.
+Best Hyper-Parameters for Logistic Regressions:
 
-```python
-# Create bars for day of the week vs. domestic gross
-sns.barplot(x='day_of_the_week', y='domestic_gross_in_mill', data=budgets)
-sns.set(font_scale=0.75)
-plt.ylabel('Domestic Gross per million')
-plt.title('Domestic Gross on Given Day of the Week')
-plt.show()
+[({'C': 1.0,
+   'max_iter': 1000,
+   'penalty': 'l1',
+   'random_state': 42,
+   'solver': 'liblinear',
+   'tol': 0.001},
+  0.8271080139372822,
+  0.8074172827536056)]
+  
+Scores for this model:
 
-# Create bars for month of the year vs. domestic gross
-sns.barplot(x='month_of_the_year', y='domestic_gross_in_mill', data=budgets)
-sns.set(font_scale=0.75)
-plt.xticks(rotation=45)
-plt.ylabel('Domestic Gross per million')
-plt.title('Domestic Gross by Month of the Year')
-plt.show()
-```
-
-![img](./images/bestdayforfilm.png)
-![img](./images/month.png)
+Logistic Regression:
+Accuracy train	0.828
+Accuracy test	0.807
+Recall train	0.859
+Recall test		0.839
+F1 train	0.833
+F1 test		0.689
+CV results		0.827
+Precision train		0.809
+Precision test		0.584
 
 ### Decision Tree
 
-Selecting a talented musician with a track record of working on successful films is crucial for creating a captivating soundtrack that enhances the overall impact and success of our movie.
+Best Hyper-Parameters for Decision Tree:
 
-```python
-# Merge two DataFrames 'merged_df' and 'people_and_movies_df' using an outer join
-relevant_people_and_movies = pd.merge(merged_df, people_and_movies_df, how='outer', left_on='movie', right_on='original_title')
+[({'criterion': 'gini',
+   'max_depth': 7,
+   'min_samples_leaf': 2,
+   'min_samples_split': 2,
+   'random_state': 42},
+  0.8286759581881533,
+  0.7765119379469155)]
+  
+Scores for this model:
 
-# Drop columns we don't need
-relevant_people_and_movies = relevant_people_and_movies.drop(['release_date',
-  'runtime_minutes', 'original_title', 'genre'], axis=1)
+Decision Tree:
+Accuracy train	0.833
+Accuracy test	0.777
+Recall train	0.910
+Recall test	0.852
+F1 train	0.845
+F1 test	0.659
+CV results	0.829
+Precision train	0.809
+Precision test	0.584
 
-# Sort the DataFrame by 'ROI' in descending order
-relevant_people_and_movies = relevant_people_and_movies.sort_values(by='ROI', ascending=False)
+Trained DT Model:
+<br>
+![img]('./images/traineddt.png)
 
-# Drop rows with missing 'primary_profession' values
-relevant_people_and_movies = relevant_people_and_movies.dropna(subset=['primary_profession'])
 
-# Filter the DataFrame based on primary profession
-chosen_artists = relevant_people_and_movies[relevant_people_and_movies['primary_profession'].str.contains \
-                                                  ('soundtrack|composer|music_department|sound_deparment')]
-# Select relevant columns
-chosen_artists = chosen_artists[['primary_name', 'primary_profession', 'ROI', 'averagerating', 'numvotes']]
-
-# Drop duplicate rows, if any
-chosen_artists = chosen_artists.drop_duplicates()
-
-# Sort by 'average rating' in descending order 
-chosen_artists = chosen_artists.sort_values(by='averagerating', ascending=False)
-
-# Chose only 'successful' artists by setting the roi to 2 as well as the minimum rating to 7 and display final result
-chosen_artists = chosen_artists[chosen_artists['ROI'] > 1.74]
-chosen_artists = chosen_artists[chosen_artists['numvotes'] > 10000]
-chosen_artists[chosen_artists['averagerating'] >= 7]
-```
-
-![img](./images/sound_team.png)
-
+ROC for both models:
+<br>
+![img]('./images/roc.png)
 
 
 ## Conclusion
 
-An EDA only allows us to look at the statistical data and come up with likely probabilities. There is no way to guarantee the performance of any individual director, actor, musician, or genre. However, with that being said, we feel comfortable creating business recommendations based on the likelihood of these events occurring, as well as basing them on the trends within the industry.
+In this project, I aimed to develop classification models to predict whether a candidate's income exceeds $50,000 annually. Working with an imbalanced dataset, I employed various techniques to enhance model performance. Here's a summary of my findings:
 
-- Categorically, action films generate the largest return on investment by far, compared to any other movie genre. This is likely due to the mass popularity of action films. We should aim to create an action movie as it will have the largest target audience as well as generate the most ROI for our company.
+### Logistic Regression
+The logistic regression model provided a reasonable baseline performance with an accuracy of approximately 80.73% on the test data. However, precision on the test set was lower at 58.38%, indicating that there were some false positives. This model can be considered a suitable starting point, but there's room for improvement.
 
-- The best day to release our film is during Wednesday. Most films are actually released on Friday; however, Wednesday has the largest ROI by far. We should aim for the warmer months as well, such as June, July, and May. As those months tend to generate the most ROI as well.
-    - This is likely because during the warmer months, people are willing to drive out to see movies and spend time, whereas during colder months, people will tend to stay home to avoid inclement weather.
-    - Wednesday likely generates the highest ROI because it's in the middle of the week, which allows most people to view the film within the first week. However, there is no real way to prove this theory; all we know is that Wednesday generates the highest ROI on average.
+### Decision Tree
+The decision tree model, while overfitting the training data, showed promise. Its test accuracy was around 79.75%, with precision at 59.71%. Although overfitting is a concern, the model's potential for generalization suggests that further optimization and tuning may yield superior results.
 
-- We should absolutely work with a talented director who is not only critically acclaimed but also has a reputation for generating a positive ROI. Through data exploration as well as visualizations, we've come to the conclusion that the current best option would be Christopher Nolan. We have also provided a table of potential backup directors who all meet our criteria, assuming Mr. Nolan is not available.
-    - Mr. Nolan generates an above-average ROI compared to other high-budget films (1.74 Avg / 3.13 Nolan).
-    - He has one of the highest IMDb user rating scores (8.8).
-    - The majority of his movies fall within a 7.8-8.8 range of user ratings.
-    - The probability of a Christopher Nolan film underperforming is close to 3.8%.
+### Recommendations
+    - Prefer Logistic Regression: Among the two models, the logistic regression model outperforms the decision tree model, showing better accuracy and precision. It is advisable to prioritize using the logistic regression model for predictions.
 
-- The score of a movie is incredibly important as it often dictates the mood and ambiance of the film. With that being said, we have provided a list of potential musicians who fall within our selected criteria.
-    - Sam Estes and Andrew Kawczynski are our two recommendations for soundtrack producers. They have collectively worked on incredible movies such as Inception, Planet of the Apes, Interstellar, Top Gun Maverick and The Dark Knight.
-        
-## Next Steps
+    - Further Model Improvement: While we have made progress in optimizing these models, it's worth exploring other classification algorithms like K-Nearest Neighbors (KNN) or Random Forest to potentially achieve better performance. These models may offer different insights and capabilities for your specific use case.
 
-To provide even more insight for Universal Pictures, these are the steps we could take
 
-- We can build predictive models using machine learning techniques. We could use features like director, genre, release date, and budget to predict box office performance. This would require splitting our data into training and testing sets, selecting appropriate algorithms, and evaluating model performance.
+### Next Steps
+To continue improving and expanding this project, here are some suggested next steps:
 
-- Import a database that has a detailed filmography of directors and studios, We lost a some data from cleaning due to the fact it was incredibly difficult to filter and maintain everything that was relevant. Some newer movies are not on this list either, and it would be important to analyze the current market rather than the market a few years ago.
+    - Cloud Deployment: I would consider deploying the machine learning model to a cloud service, such as AWS or Saturn Cloud. This will enable me to conduct more extensive hyperparameter tuning and make the model accessible for real-world predictions.
 
-- Compare how best-sellers in all film genres compete with each other. Action movies may have the highest ROI on average but we should look at the outliers for each genre and see how popular they became and how much they generated.
+    - Explore Additional Models: I'd experiment with different classification models, such as K-Nearest Neighbors (KNN), Random Forest, Support Vector Machines (SVM), or Neural Networks. Each model has its strengths and may provide enhanced predictive capabilities.
 
-- Research how musical data influences the success of films. What musical genres have the highest impact on other film genres? What is the average length of a song in each genre, what variety of musical genres are within an OST? 
+    - Polish Model Pipelines: Streamlining the model training and testing processes by refining the ModelValidator class and pipelines would be essential. Creating efficient and versatile pipelines can help save time and maintain consistency in the modeling workflow.
 
-- Compare and contrast ROI and user rating relative to genre for directors. See how directors perform in each individual genre and compare it to the averages of other directors and genres.
+    - Data Enhancement: Importing more up-to-date and detailed data to enhance the quality of predictions would be a priority. Cleaning and maintaining a rich dataset is crucial for accurate modeling.
+
+    - Comparative Analysis: Comparing the performance of different models across various genres, directors, or other relevant factors can offer valuable insights into the preferences and trends in the industry.
+
+    - By following these next steps and continuously refining the models, I can provide more accurate and insightful predictions, making a valuable contribution to Microsoft's HR practices and further showcasing my data science capabilities.
 
 ## For More Information
 
