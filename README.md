@@ -95,7 +95,7 @@ After all hyperparameter tuning these are the final models I created.
 ### Logistic Regression
 
 Best Hyper-Parameters for Logistic Regressions:
-
+```
 [({'C': 1.0,
    'max_iter': 1000,
    'penalty': 'l1',
@@ -104,10 +104,9 @@ Best Hyper-Parameters for Logistic Regressions:
    'tol': 0.001},
   0.8271080139372822,
   0.8074172827536056)]
-  
+```
 Scores for this model:
-
-Logistic Regression:
+```
 Accuracy train	0.828
 Accuracy test	0.807
 Recall train	0.859
@@ -117,11 +116,11 @@ F1 test		0.689
 CV results		0.827
 Precision train		0.809
 Precision test		0.584
-
+```
 ### Decision Tree
 
 Best Hyper-Parameters for Decision Tree:
-
+```
 [({'criterion': 'gini',
    'max_depth': 7,
    'min_samples_leaf': 2,
@@ -129,10 +128,9 @@ Best Hyper-Parameters for Decision Tree:
    'random_state': 42},
   0.8286759581881533,
   0.7765119379469155)]
-  
+```
 Scores for this model:
-
-Decision Tree:
+```
 Accuracy train	0.833
 Accuracy test	0.777
 Recall train	0.910
@@ -142,15 +140,15 @@ F1 test	0.659
 CV results	0.829
 Precision train	0.809
 Precision test	0.584
-
+```
 Trained DT Model:
 <br>
-![img]('./images/traineddt.png)
+![img]('./images/traineddt.png')
 
 
 ROC for both models:
 <br>
-![img]('./images/roc.png)
+![img]('./images/roc.png')
 
 
 ## Conclusion
