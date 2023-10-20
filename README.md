@@ -103,15 +103,19 @@ Best Hyper-Parameters for Logistic Regressions:
 ```
 Scores for this model:
 ```
-Accuracy train      	0.828
-Accuracy test	      0.807
-Recall train      	0.859
-Recall test	      	0.839
-F1 train	            0.833
-F1 test		         0.689
-CV results		      0.827
-Precision train		0.809
-Precision test		   0.584
+Accuracy train: 0.828
+Accuracy test: 0.807
+
+Recall train: 0.859
+Recall test: 0.839
+
+F1 train: 0.833
+F1 test:  0.689
+
+CV results: 0.827
+
+Precision train: 0.809
+Precision test: 0.584
 ```
 ### Decision Tree
 
@@ -127,15 +131,19 @@ Best Hyper-Parameters for Decision Tree:
 ```
 Scores for this model:
 ```
-Accuracy train	    0.833
-Accuracy test    	 0.777
-Recall train   	 0.910
-Recall test	       0.852
-F1 train	          0.845
-F1 test	          0.659
-CV results	       0.829
-Precision train	 0.809
-Precision test     0.584
+Accuracy train: 0.833
+Accuracy test: 0.777
+
+Recall train: 0.910
+Recall test: 0.852
+
+F1 train: 0.845
+F1 test: 0.659
+
+CV results: 0.829
+
+Precision train: 0.809
+Precision test: 0.584
 ```
 Trained DT Model:
 <br>
