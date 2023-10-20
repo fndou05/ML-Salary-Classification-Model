@@ -38,7 +38,7 @@ Baseline AUC:
 ![img](./images/logregbaseauc.png)
 <br>
 Scores:
-
+```
 Accuracy train Data: 82.82%
 Accuracy test Data: 80.73%
 
@@ -50,7 +50,7 @@ Precision test Data: 58.38%
 
 F1 train Data: 83.34%
 F1 test Data: 68.79%
-
+```
 The accuracy and AUC is already pretty good so it may be difficult to improve this model from its baseline. But the performance is defintiely looking good.
 
 ### Decision Tree
@@ -143,12 +143,12 @@ Precision test	0.584
 ```
 Trained DT Model:
 <br>
-![img]('./images/traineddt.png')
+![img](./images/traineddt.png)
 
 
 ROC for both models:
 <br>
-![img]('./images/roc.png')
+![img](./images/roc.png)
 
 
 ## Conclusion
