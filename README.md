@@ -25,8 +25,6 @@ Through upscaling a unbalanced dataset using SMOTE, using classes to test multip
 
 ## Baseline Models
 
-Assembling a top-notch production team is essential for creating a successful film. Identifying the best director and writer for the job is crucial. While actors play significant roles, directors often craft roles with specific actors in mind. Therefore, determining the most successful actor may not directly contribute to our production team's ability to make the best possible movie. The success of a film largely hinges on the artistic vision of the director and the script quality. Relying solely on statistics related to actors may not enhance our return on investment (ROI) and could potentially have a detrimental impact on the film's quality.
-
 ### Logistic Regression
 
 Baseline Matrix:
@@ -188,7 +186,7 @@ To continue improving and expanding this project, here are some suggested next s
 
 ## For More Information
 
-Please review the full analysis in [my Jupyter Notebook](./code/Salary-Classifcation-Models.ipynb) or my [presentation](./Salary_Prediction.pdf).
+Please review the full analysis in [my Jupyter Notebook](./code/Salary-Classifcation-Models.ipynb) or my [presentation](./Salary-Classification-Model.pdf).
 
 For any additional questions, please contact me:
 
